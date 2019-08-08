@@ -24,6 +24,7 @@
 .react-calendar .component {
   width: 100%;
   height: 100%;
+  border: 1px solid #3f3d3d;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3125);
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3125);
   border-radius: 3px;
@@ -394,6 +395,9 @@
   text-decoration: underline;
 }
 .react-calendar .calendar-date .calendar-day .different-month {
+  color: #c0c0c0;
+}
+.react-calendar .calendar-date .calendar-day .disabled {
   color: #c0c0c0;
 }
 .react-calendar .calendar-date .calendar-day .selected {

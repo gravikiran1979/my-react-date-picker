@@ -25,14 +25,11 @@ export default class MyReactDatePicker extends React.Component {
         }
         console.log("Prev Start Date: " + this.props.startDate);
         if ((this.props.startDate !== null) && (this.props.startDate !== undefined)) {
-            console.log("Validating startDate");
             var newDateObject = moment(this.props.startDate);
-            console.log("New DateObject: " + newDateObject.date);
             this.setState({
-                month: newDateObject.month,
-                year: newDateObject.year
+                month: newDateObject,
+                year: newDateObject.format("Y")
             })
-            console.log("Set selected to: "+this.state.selected)
         }
         this.firstInYearTable = null;
         this.lastInYearTable = null;
@@ -45,7 +42,7 @@ export default class MyReactDatePicker extends React.Component {
         this.setState({
             selected: date
         });
-        this.props.onChange(date.format("MM/DD/Y"))
+        this.props.onChange(date)
     }
     daysInMonth = () => {
         return this.state.dateObject.daysInMonth();
@@ -128,11 +125,11 @@ export default class MyReactDatePicker extends React.Component {
                 <CalendarDates
                     key={date.toString()}
                     date={date.clone()}
+                    disablePreviousDates={this.props.disablePreviousDates}
                     month={this.state.dateObject}
                     selectDate={this.selectDate}
-                    selected={this.state.selected}
-                    startDate={this.state.startDate}
-                    endDate={this.state.endDate}
+                    startDate={this.props.startDate}
+                    endDate={this.props.endDate}
                 />
             );
             date.add(1, "w");
@@ -150,8 +147,8 @@ export default class MyReactDatePicker extends React.Component {
         return (
             <div>
                 <div className="react-calendar">
+                    <div className="selector selectarrow selectarrowleft after" />
                     <div className="component">
-                        <div className="selector selectarrow selectarrowleft after" />
                         <CalendarNav
                             dateObject={this.state.dateObject}
                             updDateObject={this.updDateObject}

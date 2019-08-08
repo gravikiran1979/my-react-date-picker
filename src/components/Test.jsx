@@ -22,7 +22,7 @@ export default class Test extends Component {
     }
     handleFromDateChange = (newDate) => {
         this.setState({
-            fromDate: newDate
+            fromDate: newDate.format("MM/DD/Y")
         })
         this.toggleDatePickerForStartDate()
     }
@@ -34,7 +34,7 @@ export default class Test extends Component {
     }
     handleToDateChange = (newDate) => {
         this.setState({
-            toDate: newDate
+            toDate: newDate.format("MM/DD/Y")
         })
         this.toggleDatePickerForEndDate()
     }
@@ -74,7 +74,7 @@ export default class Test extends Component {
                                     startDate={this.state.fromDate}
                                     endDate={this.state.toDate}
                                     onChange={this.handleFromDateChange}
-                                    isClearable={false}
+                                    disablePreviousDates="false"
                                     onClickOutside={this.toggleDatePickerForStartDate}
                                     open={this.state.datePickerIsOpenForStartDate}
                                 />
@@ -91,7 +91,7 @@ export default class Test extends Component {
                                     startDate={this.state.fromDate}
                                     endDate={this.state.toDate}
                                     onChange={this.handleToDateChange}
-                                    isClearable={false}
+                                    disablePreviousDates="true"
                                     onClickOutside={this.toggleDatePickerForEndDate}
                                     open={this.state.datePickerIsOpenForEndDate}
                                 />
