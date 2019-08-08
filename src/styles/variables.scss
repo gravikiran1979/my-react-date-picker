@@ -1,0 +1,106 @@
+/* COLORS */
+
+$white: #ffffff;
+$white-2: #fafafa;
+$black: #3c3c3c;
+$black-1: #000000;
+$dark-blue: #003e78;
+$blue-1: #00559d;
+$blue-2: #0086d4;
+$blue-3: #00a5fa;
+$blue-3-lighten: #17b4ff;
+$red: #ff4421;
+$red-lighten: #ff602e;
+$green: #14b152;
+$green-lighten: #24c85f;
+$yellow: #ffca7d;
+$orange: #ff7406;
+$grey-4: #494949;
+$grey-6: #656565;
+$grey-6-lighten: #828282;
+$grey-b: #b3b3b3;
+$grey-d: #dededd;
+$grey-e: #efefed;
+$grey-e-lighten: #fefefe;
+$grey-f: #f5f5f5;
+$grey-g: #eceeef;
+$grey-h: #adadad;
+$grey-i: #cccccc;
+$grey-j: #959595;
+$gray-k: #f2f2f2;
+$placeholder: #757575;
+
+/*Modal Backdrop*/
+
+$backdrop: rgba(0, 0, 0, 0.5) 100% no-repeat;
+
+/* Named text colors */
+
+$normal-text: $black;
+$mid-text: $grey-6;
+$subtle-text: $grey-b;
+$ghost-text: $grey-d;
+$error-text: $red;
+$important-text: $green;
+$highlight-text: $blue-2;
+$link-color: $blue-3;
+
+/* Filter Panel */
+
+$filter-panel-width: 330px;
+
+/* Table colors */
+
+$table-black: #020202;
+$table-blue: #0084d7;
+$table-blue-2: #00a3fd;
+$table-blue-3: #e2f2fd;
+$table-green: #52c9b6;
+$table-purple: #979ce5;
+$table-orange: #fba876;
+$table-blue-light: #e2f2fd;
+$table-green-light: #c7ede7;
+$table-purple-light: #dddff6;
+$table-orange-light: #fee3d2;
+$table-yellow-light: #fff2dc;
+$table-grey-1: #616161;
+$table-grey-2: #878787;
+$table-grey-3: #dad8d6;
+$table-grey-4: #f0f0f0;
+$table-header-background: $table-blue;
+$table-header-text: $white;
+$table-header-big-divider: $table-grey-1;
+$table-cell-divider: $table-grey-3;
+$table-cell-text: $table-black;
+$table-cell-editable-background: $white;
+$table-cell-active-background: $white;
+$table-cell-active-border: $table-blue-2;
+$table-row-background: $table-grey-4;
+$table-row-selected-background: $table-blue-light;
+$table-row-new-background: #8acb88;
+
+/* Form style values */
+
+$disabled-opacity: 0.4;
+
+/* Search Grid sizing */
+
+$main-padding: 0;
+$search-buttons-height: 5.125rem;
+
+/* Breakpoints */
+
+$desktop-width: 800px;
+$tablet-width: 480px;
+$navbar-breakpoint: 1600px;
+$navbar-height: 4rem;
+$navbar-height-mobile: 6.9375rem;
+
+/* Fonts */
+
+$regular-font-family: 'Roboto', 'sans-serif';
+$condensed-font-family: 'Roboto Condensed', 'sans-serif';
+
+/* z-index */
+$z-index-stack: base, filter-panel, inactive-pane, navigation,
+  pane-toggle-button, date-picker, tooltip, modal-backdrop, modal, toast;

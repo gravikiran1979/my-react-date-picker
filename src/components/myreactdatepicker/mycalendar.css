@@ -1,0 +1,409 @@
+.header {
+  margin: 0 auto;
+}
+.react-calendar {
+  width: 245px;
+  height: auto;
+  margin: 0 auto;
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  position: relative;
+  border-collapse: separate;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: transparent;
+  z-index: 1;
+}
+@keyframes selectorfadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.react-calendar.calendar-static {
+  margin-left: auto;
+  margin-right: auto;
+}
+.react-calendar .component {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3125);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3125);
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  animation: selectorfadein 0.1s;
+}
+.react-calendar .calendar-navi {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: table;
+  border-spacing: 0;
+  border-collapse: separate;
+  background-color: #fafafa;
+  vertical-align: middle;
+  border-radius: 3px 3px 0 0;
+  -webkit-border-radius: 3px 3px 0 0;
+}
+.react-calendar .selector {
+  width: 15px;
+  height: 15px;
+  bottom: 100%;
+  left: 20%;
+  top: 8px;
+  margin-left: -25px;
+  content: "";
+  transform: rotate(225deg);
+  position: relative;
+  padding: 0;
+  border: 1px solid #ccc;
+  z-index: -1;
+  overflow: hidden;
+  background-color: #fafafa;
+  animation: selectorfadein 0.1s;
+}
+.react-calendar .selector:focus {
+  border: 1px solid #add8e6;
+  outline: none;
+}
+.react-calendar .selectorarrow {
+  background: #fafafa;
+  margin-top: 12px;
+  padding: 0;
+}
+
+.react-calendar .selectorarrow:after,
+.react-calendar .selectorarrow:before {
+  bottom: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+}
+
+.react-calendar .selectorarrow:after {
+  border-color: rgba(250, 250, 250, 0);
+  border-bottom-color: #fafafa;
+  border-width: 10px;
+  margin-left: -10px;
+}
+
+.react-calendar .selectorarrow:before {
+  border-color: rgba(204, 204, 204, 0);
+  border-bottom-color: #ccc;
+  border-width: 11px;
+  margin-left: -11px;
+}
+
+.react-calendar .selectorarrow:focus:before {
+  border-bottom-color: #add8e6;
+}
+
+.react-calendar .selectorarrowleft:after,
+.react-calendar .selectorarrowleft:before {
+  left: 24px;
+}
+
+.react-calendar .selectorarrowright:after,
+.react-calendar .selectorarrowright:before {
+  left: 86%;
+}
+.react-calendar .yearchangebtncell {
+  text-align: center;
+  background-color: #fafafa;
+}
+.react-calendar .yearchangebtncell:hover {
+  cursor: pointer;
+}
+.react-calendar .yearchangebtn {
+  background: #fafafa;
+  border: none;
+  width: 63px;
+  height: 22px;
+}
+.react-calendar .calendar-navi span {
+  cursor: pointer;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  display: table-cell;
+  font-size: 14px;
+  text-align: center;
+  line-height: 20px;
+  /* text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.15); */
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.react-calendar .calendar-navi span:first-child,
+.react-calendar .calendar-navi span:last-child {
+  width: 25px;
+  margin-left: 5px;
+  padding: 0 0 5px 0;
+  font-size: 22px;
+}
+.react-calendar .calendar-navi span:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.react-calendar .calendar-navi .calendar-label {
+  background-color: transparent;
+  color: #00a5fa;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+@font-face {
+  font-family: "mydatepicker";
+  src: url("data:application/octet-stream;base64,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")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+.react-calendar .mydpicon {
+  font-family: "mydatepicker";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
+}
+.react-calendar .icon-mydpright:before {
+  position: relative;
+  color: #000;
+  font-size: 20px;
+  top: 2px;
+  content: "\e800";
+  padding-bottom: 5px;
+}
+.icon-mydpleft:before {
+  position: relative;
+  color: #000;
+  font-size: 20px;
+  top: 2px;
+  content: "\e801";
+}
+.icon-mydpup:before {
+  color: #000;
+  font-size: 20px;
+  content: "\e804";
+}
+
+.icon-mydpdown:before {
+  color: #000;
+  font-size: 20px;
+  content: "\e805";
+}
+
+.react-calendar .calendar-navi span.button-check {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC\
+    9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDEyIDE2Ij48cGF0aCBmaWxsPSIjZmZmZmZmIiBkP\
+    SJNMTIgNWwtOCA4LTQtNCAxLjUtMS41TDQgMTBsNi41LTYuNUwxMiA1eiIvPjwvc3ZnPg==");
+}
+.react-calendar .calendar-navi span.button-close {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC\
+    9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDEyIDE2Ij48cGF0aCBmaWxsPSIjZmZmZmZmIiBkP\
+    SJNNy40OCA4bDMuNzUgMy43NS0xLjQ4IDEuNDhMNiA5LjQ4bC0zLjc1IDMuNzUtMS40OC0xLjQ4TDQuNTIgOCAuNzcgNC4y\
+    NWwxLjQ4LTEuNDhMNiA2LjUybDMuNzUtMy43NSAxLjQ4IDEuNDhMNy40OCA4eiIvPjwvc3ZnPg==");
+}
+.react-calendar .calendar-date {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+.react-calendar .calendar-date table {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+  background-color: #ffffff;
+}
+.react-calendar .calendar-date table thead tr > *,
+.react-calendar .calendar-date table tbody tr > * {
+  color: #000000;
+  width: 36px;
+  height: 35px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 35px;
+  border: 0;
+  background-color: #fafafa;
+}
+.react-calendar .calendar-date table tbody tr > * {
+  color: #334455;
+  cursor: pointer;
+  position: relative;
+  font-size: 14px;
+  font-weight: normal;
+  background-color: #ffffff;
+}
+.react-calendar .calendar-date table tbody tr > * > span {
+  color: inherit;
+  z-index: 10;
+  position: relative;
+}
+/* Select a Day */
+
+.react-calendar .calendar-date table tbody tr > *:hover {
+  color: #000000;
+  border-radius: 3px;
+  background-color: #d9dfdf;
+}
+.react-calendar .calendar-date .calendar-day > *:hover {
+  border-radius: 5px;
+  border-color: #3f3d3d;
+}
+.react-calendar .calendar-date table tbody tr > *.empty,
+.react-calendar .calendar-date table tbody tr > *.disable {
+  color: #8899aa;
+  cursor: not-allowed;
+  background-color: #efefef;
+}
+.react-calendar .calendar-date table tbody tr > *.empty:hover:after,
+.react-calendar .calendar-date table tbody tr > *.disable:hover:after {
+  content: "";
+  display: none;
+}
+.react-calendar .calendar-date table tbody tr > *.current span {
+  color: #fff;
+}
+.react-calendar .calendar-date table tbody tr > *.current:after {
+  border-color: #3f3d3d;
+}
+/* Select A Month */
+.react-calendar .calendar-date table.calendar-month tbody tr > * {
+  width: 81.66666666666667px;
+  height: 52px;
+}
+.react-calendar .calendar-date table.calendar-month tbody tr > * span {
+  display: block;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.react-calendar .calendar-date .calendar-month .selected {
+  color: #ffffff;
+  border-radius: 3px;
+  background-color: #00a5fa;
+}
+/* Select A Year */
+.react-calendar .calendar-date table.calendar-year tbody tr > * {
+  width: 81.66666666666667px;
+  height: 28px;
+}
+.react-calendar .calendar-date table.calendar-year tbody tr > * span {
+  display: block;
+  line-height: 18px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+/* Select a Time */
+.react-calendar .calendar-time {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: table;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 0 0 3px 3px;
+  -webkit-border-radius: 0 0 3px 3px;
+}
+.react-calendar .calendar-date + .calendar-time {
+  border-top: 1px solid #d0d0d0;
+  background-color: #f8f8f8;
+}
+.react-calendar .calendar-time .calendar-field {
+  width: 33.3333333333%;
+  padding: 10px 0;
+  display: table-cell;
+  position: relative;
+  text-align: center;
+  vertical-align: top;
+}
+.react-calendar .calendar-time .calendar-field:first-child {
+  text-align: right;
+}
+.react-calendar .calendar-time .calendar-field:first-child:after {
+  top: 12px;
+  right: -10px;
+  content: ":";
+  position: absolute;
+}
+.react-calendar .calendar-time .calendar-field:last-child {
+  text-align: left;
+}
+.react-calendar .calendar-time .calendar-field:last-child:after {
+  top: 12px;
+  left: -10px;
+  content: ":";
+  position: absolute;
+}
+.react-calendar .calendar-time .calendar-field input[type="number"] {
+  width: 100%;
+  max-width: 50px;
+  margin: 0;
+  padding: 3px 4px;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #d0d0d0;
+  background-color: #ffffff;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.react-calendar .calendar-time .calendar-field input[type="number"]:hover {
+  border-color: #a0a0a0;
+}
+.react-calendar .calendar-time .calendar-field input[type="number"]:focus {
+  border-color: #3296c8;
+}
+.react-calendar .calendar-time .calendar-field label {
+  color: #778899;
+  margin: 5px 0 0 0;
+  padding: 0;
+  display: block;
+  font-size: 12px;
+  line-height: 12px;
+}
+.react-calendar .calendar-button {
+  background: #fafafa;
+  border: none;
+  height: 22px;
+  width: 16px;
+  cursor: pointer;
+}
+.react-calendar .calendar-year .selected {
+  color: #ffffff;
+  border-radius: 3px;
+  background-color: #00a5fa;
+}
+.react-calendar .calendar-date .calendar-day .today {
+  font-weight: 600;
+  text-decoration: underline;
+}
+.react-calendar .calendar-date .calendar-day .different-month {
+  color: #c0c0c0;
+}
+.react-calendar .calendar-date .calendar-day .selected {
+  color: white;
+  border-radius: 3px;
+  background-color: #00a5fa;
+}
+/* @end react-calendar */

@@ -1,0 +1,78 @@
+@import '../variables.scss';
+
+.date-controls {
+  margin: 0 auto;
+  position: relaive;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  border-bottom: 1px solid $grey-f;
+}
+.date-width {
+  border: 0px solid $grey-b;
+  height: 33px;
+}
+.date-text-box {
+  width: 165px;
+  height: 31px;
+  padding-left: 8px;
+  color: $grey-4;
+  font: 400 14px Arial, Helvetica, sans-serif;
+  border-radius: 2px;
+  border: 1px solid #b3b3b3;
+}
+input:hover,
+input:focus {
+  border: 1px solid rgb(0, 140, 255);
+  color: #000000;
+}
+.startDate {
+  position: relative;
+  float: left;
+  margin-left: 5px;
+  width: auto;
+}
+.endDate {
+  float: right;
+  margin-left: 27px;
+  width: auto;
+}
+.cal-box {
+  position: relative;
+  float: right;
+  margin-left: 0px;
+  margin-right: 0px;
+  top: 0px;
+  height: 31px;
+  width: 26px;
+  background: $grey-b;
+  cursor: pointer;
+  background-size: 60% 60%;
+  background-repeat: no-repeat;
+}
+.cal-icon {
+  position: relative;
+  display: inline-block;
+  box-sizing: inherit;
+  top: 8px;
+  left: 5px;
+  height: 30px;
+  width: 23px;
+  background-image: url('../../assets/images/calendar.png');
+  background-size: 65% 55%;
+  background-repeat: no-repeat;
+}
+.cal-box:hover {
+  background-color: $blue-3-lighten;
+}
+.react-datepicker__close-icon::after {
+  display: none;
+}
+
+input:hover,
+input:focus {
+  border: 1px solid rgb(0, 140, 255);
+  color: #000000;
+}
