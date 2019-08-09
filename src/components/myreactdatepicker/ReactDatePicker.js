@@ -28,7 +28,6 @@ export default class ReactDatePicker extends React.Component {
     weekdayshort = moment.weekdaysShort();
 
     selectDate = (date) => {
-        console.log("Selected: "+date);
         this.setState({
             selected: date
         });
@@ -91,7 +90,6 @@ export default class ReactDatePicker extends React.Component {
         this.toggleCanlendarTable()
     };
     setYear = year => {
-        console.log("Setting Year to: " + year);
         let newDateObject = this.state.dateObject.set("year", year);
         this.setState({
             dateObject: newDateObject,

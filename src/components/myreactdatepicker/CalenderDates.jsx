@@ -2,13 +2,6 @@ import React from 'react';
 import moment from 'moment';
 
 export default class CalendarDates extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log("Disable Dates: " + this.props.disablePreviousDates);
-        console.log("Start Date: " + this.props.startDate);
-        console.log("End Date: " + this.props.endDate);
-    }
-    
     handleOnDayClick = (e, day) => {
         let sDate = moment(day.fullDate);
         if (this.props.disablePreviousDates === "false") {

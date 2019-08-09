@@ -56,6 +56,8 @@ export default class Test extends Component {
             })
         }
     }
+    // End of Handle Click made outside DatePicker
+
     render() {
         return (
             <div style={{ margin: '0 auto', width: '100%' }}>

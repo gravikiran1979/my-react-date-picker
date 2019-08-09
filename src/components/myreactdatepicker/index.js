@@ -35,7 +35,6 @@ export default class MyReactDatePicker extends React.Component {
     weekdayshort = moment.weekdaysShort();
 
     selectDate = (date) => {
-        // console.log("Selected: " + date.format("MM/DD/Y"));
         this.setState({
             selected: date
         });
@@ -54,7 +53,7 @@ export default class MyReactDatePicker extends React.Component {
         let dateObject = this.state.dateObject;
         let firstDay = moment(dateObject)
             .startOf("month")
-            .format("d"); // Day of week 0...1..5...6
+            .format("d");
         return firstDay;
     };
     month = () => {
