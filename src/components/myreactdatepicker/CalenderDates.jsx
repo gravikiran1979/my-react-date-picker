@@ -2,11 +2,11 @@ import React from 'react';
 import moment from 'moment';
 
 export default class CalendarDates extends React.Component {
-    // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
-        console.log("StartDate in CalendarDates: "+this.props.startDate);
-        console.log("EndDate in CalendarDates: " + this.props.endDate);
+        console.log("Disable Dates: " + this.props.disablePreviousDates);
+        console.log("Start Date: " + this.props.startDate);
+        console.log("End Date: " + this.props.endDate);
     }
     
     handleOnDayClick = (e, day) => {
@@ -16,7 +16,6 @@ export default class CalendarDates extends React.Component {
         } else {
             if (day.date.isBefore(this.props.startDate)) {
             } else {
-                console.log("1. " + day.number + ", 2. " + moment(this.props.startDate).date())
                 if (day.number >= moment(this.props.startDate).date()) {
                     this.props.selectDate(sDate);
                 }
@@ -26,53 +25,62 @@ export default class CalendarDates extends React.Component {
     applyCss = (day) => {
         let calendarDate = "calendar-day "; 
         let styleName = "";
-        if (this.props.disablePreviousDates !== "true") {
-            if (day.isToday) {
-                styleName = calendarDate + "today";
-            } else if (!day.isCurrentMonth) {
-                styleName = calendarDate + "different-month";
-            } else if (day.date.isSame(this.props.selected) ||
-                this.checkStartEndDateCalendar(day)) {
-                styleName = calendarDate + "selected";
+        if (day.isToday) {
+            styleName = calendarDate + "today" + this.applyCssForToday(day);
+        } else if (!day.isCurrentMonth) {
+            styleName = calendarDate + "different-month";
+        } else if (day.date.isSame(this.props.selected) ||
+            this.checkStartEndDateCalendar(day)) {
+            styleName = calendarDate + "selected";
+        } 
+        if (this.props.disablePreviousDates) {
+            if (this.props.startDate !== undefined &&
+                day.date.isBefore(this.props.startDate)) {
+                styleName = "disabled"
             }
-            return styleName + this.validateSelection(day);
         }
-        return styleName + this.applyCssForDisabledDates(day);
+        return styleName
     } 
+    applyCssForToday = (day) => {
+        if (this.props.disablePreviousDates) {
+            if (this.props.endDate !== undefined &&
+                day.date.isSame(this.props.endDate)) {
+                return " selected";
+            }
+        } else {
+            if (this.props.startDate !== undefined &&
+                day.date.isSame(this.props.startDate)) {
+                return " selected";
+            }
+        }
+        return "";
+    }
     applyCssForDisabledDates = (day) => {
-        if (this.props.disablePreviousDates === "true") {
+        if (this.props.disablePreviousDates) {
             if (this.props.startDate !== undefined &&
                 day.date.isBefore(this.props.startDate)) {
                 return " disabled"
-            } else if (!day.isCurrentMonth) {
+            }
+        } else {
+            if (!day.isCurrentMonth) {
                 return "different-month";
             }
         }
     }
     checkStartEndDateCalendar = (day) => {
-        if ((this.props.disablePreviousDates !== "true" &&
-                this.props.startDate !== undefined &&
-                day.date.isSame(this.props.startDate)) || 
-            (this.props.disablePreviousDates === "true" &&
+        if ((!this.props.disablePreviousDates &&
+            this.props.startDate !== undefined &&
+            day.date.isSame(this.props.startDate)) ||
+            (this.props.disablePreviousDates &&
                 this.props.endDate !== undefined &&
                 (day.date.isSame(this.props.endDate)))) {
             return true;
         }
         return false;
     }
-    validateSelection = (day) => {
-        if (day.isToday) {
-            if ((this.props.startDate !== undefined &&
-                    day.date.isSame(this.props.startDate)) ||
-                (this.props.startDate !== undefined &&
-                    day.date.isSame(this.props.endDate))) {
-                    return " selected";
-            }
-        } 
-        return "";
-    }
+
     renderDay = (day) => {
-        var key = day.date.format("MM/DD.YYYY");
+        var key = day.date.format("MM/DD/Y");
         return (<td className={this.applyCss(day)} 
             key={key} onClick={(e) => { this.handleOnDayClick(e, day) }}>
             <span>

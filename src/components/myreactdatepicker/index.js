@@ -16,14 +16,13 @@ export default class MyReactDatePicker extends React.Component {
             firstYear: date.year,
             showCalendarTable: true,
             showMonthTable: false,
+            showYearNav: false,
             dateObject: moment(),
             allmonths: moment.months(),
-            showYearNav: false,
             startDate: this.props.fromDate,
             endDate: this.props.toDate,
             selected: moment().date
         }
-        console.log("Prev Start Date: " + this.props.startDate);
         if ((this.props.startDate !== null) && (this.props.startDate !== undefined)) {
             var newDateObject = moment(this.props.startDate);
             this.setState({
@@ -31,14 +30,12 @@ export default class MyReactDatePicker extends React.Component {
                 year: newDateObject.format("Y")
             })
         }
-        this.firstInYearTable = null;
-        this.lastInYearTable = null;
     }
 
     weekdayshort = moment.weekdaysShort();
 
     selectDate = (date) => {
-        console.log("Selected: " + date.format("MM/DD/Y"));
+        // console.log("Selected: " + date.format("MM/DD/Y"));
         this.setState({
             selected: date
         });

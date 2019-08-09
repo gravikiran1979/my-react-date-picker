@@ -74,7 +74,7 @@ export default class Test extends Component {
                                     startDate={this.state.fromDate}
                                     endDate={this.state.toDate}
                                     onChange={this.handleFromDateChange}
-                                    disablePreviousDates="false"
+                                    disablePreviousDates={false}
                                     onClickOutside={this.toggleDatePickerForStartDate}
                                     open={this.state.datePickerIsOpenForStartDate}
                                 />
@@ -91,7 +91,7 @@ export default class Test extends Component {
                                     startDate={this.state.fromDate}
                                     endDate={this.state.toDate}
                                     onChange={this.handleToDateChange}
-                                    disablePreviousDates="true"
+                                    disablePreviousDates={true}
                                     onClickOutside={this.toggleDatePickerForEndDate}
                                     open={this.state.datePickerIsOpenForEndDate}
                                 />
