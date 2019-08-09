@@ -22,16 +22,16 @@
   margin-right: auto;
 }
 .react-calendar .component {
-  width: 100%;
+  width: calc(100% - 5px);
   height: 100%;
-  border: 1px solid #3f3d3d;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3125);
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3125);
   border-radius: 3px;
   -webkit-border-radius: 3px;
   animation: selectorfadein 0.1s;
 }
-.react-calendar .calendar-navi {
+.react-calendar .calendar {
+  border: 1px solid #ccc;
+}
+.react-calendar .calendar-nav {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -120,7 +120,7 @@
   width: 63px;
   height: 22px;
 }
-.react-calendar .calendar-navi span {
+.react-calendar .calendar-nav span {
   cursor: pointer;
   color: #fff;
   margin: 0;
@@ -133,17 +133,18 @@
   background-repeat: no-repeat;
   background-position: center center;
 }
-.react-calendar .calendar-navi span:first-child,
-.react-calendar .calendar-navi span:last-child {
+.react-calendar .calendar-nav span:first-child,
+.react-calendar .calendar-nav span:last-child {
   width: 25px;
   margin-left: 5px;
   padding: 0 0 5px 0;
   font-size: 22px;
+  
 }
-.react-calendar .calendar-navi span:hover {
+.react-calendar .calendar-nav span:hover {
   background-color: rgba(0, 0, 0, 0.15);
 }
-.react-calendar .calendar-navi .calendar-label {
+.react-calendar .calendar-nav .calendar-label {
   background-color: transparent;
   color: $blue-3;
   border: none;
@@ -198,12 +199,12 @@
   content: "\e805";
 }
 
-.react-calendar .calendar-navi span.button-check {
+.react-calendar .calendar-nav span.button-check {
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC\
     9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDEyIDE2Ij48cGF0aCBmaWxsPSIjZmZmZmZmIiBkP\
     SJNMTIgNWwtOCA4LTQtNCAxLjUtMS41TDQgMTBsNi41LTYuNUwxMiA1eiIvPjwvc3ZnPg==");
 }
-.react-calendar .calendar-navi span.button-close {
+.react-calendar .calendar-nav span.button-close {
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC\
     9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDEyIDE2Ij48cGF0aCBmaWxsPSIjZmZmZmZmIiBkP\
     SJNNy40OCA4bDMuNzUgMy43NS0xLjQ4IDEuNDhMNiA5LjQ4bC0zLjc1IDMuNzUtMS40OC0xLjQ4TDQuNTIgOCAuNzcgNC4y\

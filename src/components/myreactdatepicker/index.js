@@ -145,6 +145,7 @@ export default class MyReactDatePicker extends React.Component {
                 <div className="react-calendar">
                     <div className="selector selectarrow selectarrowleft after" />
                     <div className="component">
+                        <div className="calendar">
                         <CalendarNav
                             dateObject={this.state.dateObject}
                             updDateObject={this.updDateObject}
@@ -170,6 +171,7 @@ export default class MyReactDatePicker extends React.Component {
                                 </table>
                             </div>
                         )} 
+                        </div>
                     </div>
                 </div>
             </div>

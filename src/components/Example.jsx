@@ -60,11 +60,12 @@ export default class Test extends Component {
 
     render() {
         return (
-            <div style={{ margin: '0 auto', width: '100%' }}>
-                <p className="header">React Date Picker Integration</p>
-                <div className="date-controls" ref={this.setWrapperRef}>
-                    <fieldset style={{width: '65%'}}>
-                        <legend className={'required legend'}>Inclusive Date Range</legend>
+            <div style={{ margin: '0 auto', width: '60%', "margin-top": "4%" }}>
+                <div className="date-controls" style={{
+                    margin: '0 auto', width: '100%'
+                }} ref={this.setWrapperRef}>
+                    <fieldset style={{margin: '0 auto', width: '65%'}}>
+                        <legend className={'required legend'}>React Date Picker</legend>
                         <div style={{ float: 'left', width: '48%' }}>
                             <p>Start Date</p>
                             <input defaultValue={this.state.fromDate} name='startDate' className='date-text-box date-width' />

@@ -32,7 +32,9 @@
     transform: rotate(360deg);
   }
 }
-
+.example {
+  margin: 0 auto;
+}
 .column {
   float: left;
   padding: 10px;
