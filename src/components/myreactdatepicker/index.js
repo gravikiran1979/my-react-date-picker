@@ -25,10 +25,7 @@ export default class MyReactDatePicker extends React.Component {
         }
         if ((this.props.startDate !== null) && (this.props.startDate !== undefined)) {
             var newDateObject = moment(this.props.startDate);
-            this.setState({
-                month: newDateObject,
-                year: newDateObject.format("Y")
-            })
+            this.updDateObject(newDateObject);
         }
     }
 
@@ -39,6 +36,7 @@ export default class MyReactDatePicker extends React.Component {
             selected: date
         });
         this.props.onChange(date)
+        this.updDateObject(date);
     }
     daysInMonth = () => {
         return this.state.dateObject.daysInMonth();
@@ -90,11 +88,11 @@ export default class MyReactDatePicker extends React.Component {
         });
     };
     updDateObject = (newDateObject) => {
-        this.setState({
-            dateObject: newDateObject,
-            month: newDateObject,
-            year: newDateObject.format("Y")
-        });
+        console.log("In updDateObject: "+newDateObject);
+        this.state.dateObject = newDateObject;
+        this.state.month = newDateObject;
+        this.state.year = newDateObject.format("Y");
+        console.log("newDateObject: " + this.state.dateObject)
         this.toggleCanlendarTable()
     };
     setYear = year => {
