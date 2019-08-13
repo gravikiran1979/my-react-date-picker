@@ -1,3 +1,4 @@
+/* eslint-disable react/no-direct-mutation-state */
 import React from "react";
 import moment from "moment";
 import "./myreactdatepicker.scss";
@@ -17,15 +18,29 @@ export default class MyReactDatePicker extends React.Component {
             showCalendarTable: true,
             showMonthTable: false,
             showYearNav: false,
-            dateObject: moment(),
             allmonths: moment.months(),
             startDate: this.props.fromDate,
             endDate: this.props.toDate,
             selected: moment().date
         }
-        if ((this.props.startDate !== null) && (this.props.startDate !== undefined)) {
-            var newDateObject = moment(this.props.startDate);
-            this.updDateObject(newDateObject);
+        var newDateObject;
+        if (this.props.disablePreviousDates) {
+            if ((this.props.endDate !== undefined)) {
+                newDateObject = moment(this.props.endDate).clone();
+                this.updDateObject(newDateObject);
+            } else {
+                if ((this.props.startDate !== undefined)) {
+                    newDateObject = moment(this.props.startDate).clone();
+                    this.updDateObject(newDateObject);
+                }
+            }
+        } else {
+            if ((this.props.startDate !== undefined)) {
+                newDateObject = moment(this.props.startDate).clone();
+                this.updDateObject(newDateObject);
+            } else {
+                this.state.dateObject = moment();
+            }
         }
     }
 
@@ -88,11 +103,10 @@ export default class MyReactDatePicker extends React.Component {
         });
     };
     updDateObject = (newDateObject) => {
-        console.log("In updDateObject: "+newDateObject);
+        console.log("Updatin dateObjec to: " + newDateObject);
         this.state.dateObject = newDateObject;
         this.state.month = newDateObject;
         this.state.year = newDateObject.format("Y");
-        console.log("newDateObject: " + this.state.dateObject)
         this.toggleCanlendarTable()
     };
     setYear = year => {
@@ -144,31 +158,54 @@ export default class MyReactDatePicker extends React.Component {
                     <div className="selector selectarrow selectarrowleft after" />
                     <div className="component">
                         <div className="calendar">
-                        <CalendarNav
-                            dateObject={this.state.dateObject}
-                            updDateObject={this.updDateObject}
-                            showMonthsList={this.showMonthsList}
-                            showYearsList={this.showYearsList}
-                            month={this.month()}
-                            year={this.year()}
-                        />
-                        <div className="calendar-date">
-                            {this.state.showYearNav && <CalendarYears dateObject={moment()} year={this.year()} setYear={this.setYear} />}
-                            {this.state.showMonthTable && (
-                                <CalendarMonths data={moment.months()} month={this.month()} setMonth={this.setMonth} />
-                            )}
-                        </div>
-
-                        {this.state.showCalendarTable && (
+                            <CalendarNav
+                                startDate={this.props.startDate}
+                                endDate={this.props.endDate}
+                                dateObject={this.state.dateObject}
+                                updDateObject={this.updDateObject}
+                                disablePreviousDates={this.props.disablePreviousDates}
+                                showMonthsList={this.showMonthsList}
+                                showYearsList={this.showYearsList}
+                                month={this.month()}
+                                year={this.year()}
+                                data={moment.months()}
+                            />
                             <div className="calendar-date">
-                                <table className="calendar-day">
-                                    <thead>
-                                        <tr>{weekdayshortname}</tr>
-                                    </thead>
-                                    <tbody>{this.renderWeeks()}</tbody>
-                                </table>
+                                {
+                                    this.state.showYearNav &&
+                                    <CalendarYears
+                                        dateObject={moment()}
+                                        year={this.year()}
+                                        setYear={this.setYear}
+                                        endDate={this.props.endDate}
+                                        startDate={this.props.startDate}
+                                        disablePreviousDates={this.props.disablePreviousDates}
+                                    />
+                                }
+                                {
+                                    this.state.showMonthTable && 
+                                    <CalendarMonths
+                                        data={moment.months()}
+                                        month={this.month()}
+                                        dateObject={this.state.dateObject}
+                                        setMonth={this.setMonth}
+                                        endDate={this.props.endDate}
+                                        startDate={this.props.startDate}
+                                        disablePreviousDates={this.props.disablePreviousDates}
+                                    />
+                            }
                             </div>
-                        )} 
+
+                            {this.state.showCalendarTable && (
+                                <div className="calendar-date">
+                                    <table className="calendar-day">
+                                        <thead>
+                                            <tr>{weekdayshortname}</tr>
+                                        </thead>
+                                        <tbody>{this.renderWeeks()}</tbody>
+                                    </table>
+                                </div>
+                            )} 
                         </div>
                     </div>
                 </div>

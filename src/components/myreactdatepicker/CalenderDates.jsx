@@ -2,14 +2,25 @@ import React from 'react';
 import moment from 'moment';
 
 export default class CalendarDates extends React.Component {
+
     handleOnDayClick = (e, day) => {
         let sDate = moment(day.fullDate);
+        let startDateObject = moment(this.props.startDate);
+        let startDateMonth = startDateObject.format("MM");
+        let startDateYear = startDateObject.format("Y");
         if (!this.props.disablePreviousDates) {
             this.props.selectDate(sDate);
         } else {
-            if (day.date.isBefore(this.props.startDate)) {
-            } else {
-                if (day.number >= moment(this.props.startDate).date()) {
+            if (day.date.isAfter(this.props.startDate)) {
+                if (day.year === startDateYear) {
+                    if (day.month === startDateMonth) {
+                        if (day.number >= startDateObject.date()) {
+                            this.props.selectDate(sDate);
+                        }
+                    } else if (day.month > startDateMonth) {
+                        this.props.selectDate(sDate);
+                    }
+                } else if (day.year > startDateYear) {
                     this.props.selectDate(sDate);
                 }
             }
@@ -91,9 +102,9 @@ export default class CalendarDates extends React.Component {
                 isCurrentMonth: date.month() === month.month(),
                 isToday: date.isSame(new Date(), "day"),
                 date: date,
-                fullDate: date.format("MM/DD/YYYY"),
+                fullDate: date.format("MM/DD/Y"),
                 month: date.format("MM"),
-                year: date.format("YYYY")
+                year: date.format("Y")
             };
             days.push(this.renderDay(day));
             date.add(1, "d");

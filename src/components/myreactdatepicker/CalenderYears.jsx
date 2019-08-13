@@ -4,11 +4,25 @@ import moment from 'moment';
 export default class CalendarYears extends React.Component {
     constructor(props) {
         super(props);
+        var currentDateObject;
+        if (this.props.disablePreviousDates) {
+            if (this.props.endDate !== undefined) {
+                currentDateObject = moment(this.props.endDate).clone();
+            } else {
+                currentDateObject = this.props.dateObject;
+            }
+        } else {
+            if (this.props.startDate !== undefined) {
+                currentDateObject = moment(this.props.startDate).clone();
+            } else {
+                currentDateObject = this.props.dateObject;
+            }
+        }
         this.state = ({
-            dateObject: this.props.dateObject,
-            year: this.props.year,
-            firstYear: this.props.dateObject.format("Y"),
-            lastYear: this.props.dateObject.add(24, "years").format("Y")
+            dateObject: currentDateObject,
+            year: currentDateObject.format("Y"),
+            firstYear: currentDateObject.format("Y"),
+            lastYear: currentDateObject.add(24, "years").format("Y")
         })
     }
     

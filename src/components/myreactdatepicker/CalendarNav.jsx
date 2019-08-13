@@ -1,24 +1,76 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 export default class CalendarNav extends Component {
     constructor(props) {
         super(props);
+        console.log(this.props.dateObject)
+        var currentDateObject, startDateObject;
+        if (this.props.disablePreviousDates) {
+            startDateObject = moment(this.props.stateDate).clone();
+            if (this.props.endDate !== undefined) {
+                currentDateObject = moment(this.props.endDate).clone();
+            } else {
+                currentDateObject = this.props.dateObject;
+            }
+        } else { 
+            currentDateObject = this.props.dateObject;
+        }
+        console.log("Month: "+currentDateObject.format("MMM"));
         this.state = ({
-            dateObject: this.props.dateObject,
-            year: this.props.year
+            startDateObject: startDateObject,
+            dateObject: currentDateObject,
+            year: currentDateObject.format("Y")
         })
+    }
+    month = () => {
+        return this.state.dateObject.format("MMM");
     }
     year = () => {
         return this.state.dateObject.format("Y");
     }
     onPrev = (obj) => {
-        var newDateObject = this.state.dateObject.subtract(1, obj);
-        this.props.updDateObject(newDateObject);
-        this.setState({
-            dateObject: newDateObject,
-            year: newDateObject.format("Y")
-        })
+        var newDateObject;
+        if (!this.props.disablePreviousDates) {
+            newDateObject = this.state.dateObject.clone().subtract(1, obj);
+            this.props.updDateObject(newDateObject);
+            this.setState({
+                dateObject: newDateObject,
+                year: newDateObject.format("Y")
+            })
+        } else {
+            newDateObject = this.state.dateObject.clone().subtract(1, obj);
+            if (obj === "year") {
+                if (newDateObject.format("Y") >= this.state.startDateObject.format("Y")) {
+                    this.props.updDateObject(newDateObject);
+                    this.setState({
+                        dateObject: newDateObject,
+                        year: newDateObject.format("Y")
+                    })
+                }
+            } else {
+                let month = newDateObject.format("MMMM");
+                if (this.isSameYear()) {
+                    if (this.props.data.indexOf(month) >= this.state.startDateObject.format("M")) {
+                        this.props.updDateObject(newDateObject);
+                        this.setState({
+                            dateObject: newDateObject,
+                            year: newDateObject.format("Y")
+                        })
+                    } 
+                } else {
+                    this.props.updDateObject(newDateObject);
+                    this.setState({
+                        dateObject: newDateObject,
+                        year: newDateObject.format("Y")
+                    })
+                }
+            }
+        }
     };
+    isSameYear = () => {
+        return this.state.startDateObject.format("Y") === this.state.dateObject.format("Y")
+    }
     onNext = (obj) => {
         var newDateObject = this.state.dateObject.add(1, obj);
         this.props.updDateObject(newDateObject);
@@ -27,6 +79,35 @@ export default class CalendarNav extends Component {
             year: newDateObject.format("Y")
         })
     };
+    prevMonthIcon = () => {
+        let styleName = "calendar-button mydpicon";
+        if (this.props.disablePreviousDates) {
+            let newDateObject = this.state.dateObject;
+            if (this.isSameYear()) {
+                let month = newDateObject.format("MMMM");
+                if (this.props.data.indexOf(month) >= this.state.startDateObject.format("M")) {
+                    return styleName + " icon-mydpleft";
+                } 
+                return styleName + " icon-mydpleft-disabled";
+            }
+            return styleName + " icon-mydpleft";
+        }
+        return styleName + " icon-mydpleft";
+    }
+    prevYearIcon = () => {
+        let styleName = "calendar-button mydpicon";
+        if (this.props.disablePreviousDates) {
+            if (this.year() > this.state.startDateObject.format("Y")) {
+                return styleName + " icon-mydpleft";
+            } else if (this.year() === this.state.startDateObject.format("Y")) {
+                return styleName + " icon-mydpleft-disabled";
+            }
+            return styleName + " icon-mydpleft-disabled";
+            
+        }
+        return styleName + " icon-mydpleft";
+    }
+
     render() {
         return (
             <div className="calendar-nav">
@@ -35,7 +116,7 @@ export default class CalendarNav extends Component {
                         onClick={e => {
                             this.onPrev("month");
                         }}
-                        className="calendar-button mydpicon icon-mydpleft"
+                        className={this.prevMonthIcon()}
                     />
                     <span
                         onClick={e => {
@@ -43,7 +124,7 @@ export default class CalendarNav extends Component {
                         }}
                         className="calendar-label"
                     >
-                        {this.state.dateObject.format("MMM")}
+                        {this.month()}
                     </span>
                     <span
                         onClick={e => {
@@ -57,7 +138,7 @@ export default class CalendarNav extends Component {
                         onClick={e => {
                             this.onPrev("year");
                         }}
-                        className="calendar-button mydpicon icon-mydpleft"
+                        className={this.prevYearIcon()}
                     />
                     <span
                         className="calendar-label"

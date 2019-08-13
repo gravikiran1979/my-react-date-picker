@@ -187,6 +187,13 @@
   top: 2px;
   content: "\e801";
 }
+.icon-mydpleft-disabled:before {
+  position: relative;
+  color: $grey-b;
+  font-size: 22px;
+  top: 3px;
+  content: "\e801";
+}
 .icon-mydpup:before {
   color: $black-1;
   font-size: 20px;
@@ -294,6 +301,9 @@
   color: $white;
   border-radius: 3px;
   background-color: $blue-3;
+}
+.react-calendar .calendar-date .calendar-month .disabled {
+  color: #c0c0c0;
 }
 /* Select A Year */
 .react-calendar .calendar-date table.calendar-year tbody tr > * {
