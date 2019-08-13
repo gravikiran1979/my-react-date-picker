@@ -4,7 +4,7 @@ import moment from 'moment';
 export default class CalendarDates extends React.Component {
     handleOnDayClick = (e, day) => {
         let sDate = moment(day.fullDate);
-        if (this.props.disablePreviousDates === "false") {
+        if (!this.props.disablePreviousDates) {
             this.props.selectDate(sDate);
         } else {
             if (day.date.isBefore(this.props.startDate)) {

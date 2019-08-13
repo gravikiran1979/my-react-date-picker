@@ -60,7 +60,7 @@ export default class Test extends Component {
 
     render() {
         return (
-            <div style={{ margin: '0 auto', width: '60%', "margin-top": "4%" }}>
+            <div style={{ margin: '0 auto', width: '60%', marginTop: "4%" }}>
                 <div className="date-controls" style={{
                     margin: '0 auto', width: '100%'
                 }} ref={this.setWrapperRef}>
@@ -76,8 +76,8 @@ export default class Test extends Component {
                                 <MyReactDatePicker
                                     startDate={this.state.fromDate}
                                     endDate={this.state.toDate}
-                                    onChange={this.handleFromDateChange}
                                     disablePreviousDates={false}
+                                    onChange={this.handleFromDateChange}
                                     onClickOutside={this.toggleDatePickerForStartDate}
                                     open={this.state.datePickerIsOpenForStartDate}
                                 />
